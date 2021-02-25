@@ -89,6 +89,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Node Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="fault__tolerance_8h_source.html">fault_tolerance.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Node:</div>
 <div class="dyncontent">
@@ -102,14 +104,11 @@ Inheritance diagram for Node:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acfbc12d3b7d414fb12811041b04a1809"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfbc12d3b7d414fb12811041b04a1809"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()</td></tr>
+<tr class="memitem:acfbc12d3b7d414fb12811041b04a1809"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNode.html#acfbc12d3b7d414fb12811041b04a1809">initialize</a> ()</td></tr>
 <tr class="separator:acfbc12d3b7d414fb12811041b04a1809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af79916b6bb2580b7cf9397bdeb172988"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af79916b6bb2580b7cf9397bdeb172988"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::string n)</td></tr>
+<tr class="memitem:af79916b6bb2580b7cf9397bdeb172988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNode.html#af79916b6bb2580b7cf9397bdeb172988">setName</a> (std::string n)</td></tr>
 <tr class="separator:af79916b6bb2580b7cf9397bdeb172988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e5ac6b5881a3a9d82f3112953c1e546"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e5ac6b5881a3a9d82f3112953c1e546"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="memitem:a3e5ac6b5881a3a9d82f3112953c1e546"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNode.html#a3e5ac6b5881a3a9d82f3112953c1e546">getName</a> ()</td></tr>
 <tr class="separator:a3e5ac6b5881a3a9d82f3112953c1e546"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a821b0d4eb044c0ee3a61a3a1faadbe9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a821b0d4eb044c0ee3a61a3a1faadbe9f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="classNode.html">Node</a> &amp;o) const </td></tr>
@@ -121,6 +120,91 @@ Protected Attributes</h2></td></tr>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></td></tr>
 <tr class="separator:a9f5a57e15567a0b92cb8d25bcec7bd24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for <a class="el" href="classServer.html">Server</a> and <a class="el" href="classClient.html">Client</a> </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a3e5ac6b5881a3a9d82f3112953c1e546"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Node::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the name of the node</p>
+<dl class="section return"><dt>Returns</dt><dd>Name of the node </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acfbc12d3b7d414fb12811041b04a1809"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int Node::initialize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initialize node data </p>
+
+<p>Reimplemented in <a class="el" href="classClient.html#a5de857af6e3c568925ecd342314617d7">Client</a>, and <a class="el" href="classServer.html#ae94d08657f48a3b51b411463f1137375">Server</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af79916b6bb2580b7cf9397bdeb172988"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Node::setName </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the name of the node</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>- Name to set for node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/root/cjdambro/grad-school/CSE498/gits/fault-tolerance/include/<a class="el" href="fault__tolerance_8h_source.html">fault_tolerance.h</a></li>
 </ul>

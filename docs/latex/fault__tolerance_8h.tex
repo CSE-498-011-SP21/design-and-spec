@@ -6,16 +6,19 @@
 Public A\-P\-I for K\-V\-C\-G Fault Tolerance protocol.  
 
 
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
 {\ttfamily \#include $<$string$>$}\\*
 {\ttfamily \#include $<$vector$>$}\\*
 {\ttfamily \#include $<$sys/socket.\-h$>$}\\*
 {\ttfamily \#include $<$netinet/in.\-h$>$}\\*
+{\ttfamily \#include $<$boost/range/combine.\-hpp$>$}\\*
 {\ttfamily \#include $<$unistd.\-h$>$}\\*
 {\ttfamily \#include \char`\"{}kvcg\-\_\-logging.\-h\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classBackupPacket}{Backup\-Packet}
+class \hyperlink{classBackupPacket}{Backup\-Packet$<$ K, V $>$}
 \item 
 class \hyperlink{classNode}{Node}
 \item 

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>CSE-498-011-SP21: BackupPacket Class Reference</title>
+<title>CSE-498-011-SP21: BackupPacket&lt; K, V &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,22 +85,219 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classBackupPacket-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">BackupPacket Class Reference</div>  </div>
+<div class="title">BackupPacket&lt; K, V &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="fault__tolerance_8h_source.html">fault_tolerance.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8d2be31a0df7ed251d6969dc4848036e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d2be31a0df7ed251d6969dc4848036e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BackupPacket</b> (int key, size_t valueSize, char *value)</td></tr>
-<tr class="separator:a8d2be31a0df7ed251d6969dc4848036e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4747d2d6ee0a82fd026053e1167d5e38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4747d2d6ee0a82fd026053e1167d5e38"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BackupPacket</b> (char *rawData)</td></tr>
-<tr class="separator:a4747d2d6ee0a82fd026053e1167d5e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae436912e519b99db90a2ee70cc7ad7c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae436912e519b99db90a2ee70cc7ad7c8"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>serialize</b> ()</td></tr>
-<tr class="separator:ae436912e519b99db90a2ee70cc7ad7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f60ca0db42e0bc9e7c0aa3df6e561f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackupPacket.html#a26f60ca0db42e0bc9e7c0aa3df6e561f">BackupPacket</a> (K key, V value)</td></tr>
+<tr class="separator:a26f60ca0db42e0bc9e7c0aa3df6e561f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ccdce78d18e44e22dc3371035bed20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackupPacket.html#a09ccdce78d18e44e22dc3371035bed20">BackupPacket</a> (char *rawData)</td></tr>
+<tr class="separator:a09ccdce78d18e44e22dc3371035bed20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626af7de776bd98ea1a322a4e9fd87bd"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackupPacket.html#a626af7de776bd98ea1a322a4e9fd87bd">serialize</a> ()</td></tr>
+<tr class="separator:a626af7de776bd98ea1a322a4e9fd87bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36d0369d548f537a12840627a9fabbfd"><td class="memItemLeft" align="right" valign="top">K&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackupPacket.html#a36d0369d548f537a12840627a9fabbfd">getKey</a> ()</td></tr>
+<tr class="separator:a36d0369d548f537a12840627a9fabbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35e76302bebf4a0e6c871426844553fc"><td class="memItemLeft" align="right" valign="top">V&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackupPacket.html#a35e76302bebf4a0e6c871426844553fc">getValue</a> ()</td></tr>
+<tr class="separator:a35e76302bebf4a0e6c871426844553fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bdc1916566a9cffbdd26abe5c87bdad"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackupPacket.html#a3bdc1916566a9cffbdd26abe5c87bdad">getPacketSize</a> ()</td></tr>
+<tr class="separator:a3bdc1916566a9cffbdd26abe5c87bdad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename K, typename V&gt;<br/>
+class BackupPacket&lt; K, V &gt;</h3>
+
+<p>Packet definition for sending transaction log from primary server to backup servers </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a26f60ca0db42e0bc9e7c0aa3df6e561f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBackupPacket.html">BackupPacket</a>&lt; K, V &gt;::<a class="el" href="classBackupPacket.html">BackupPacket</a> </td>
+          <td>(</td>
+          <td class="paramtype">K&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a packet for decoded data (sender side)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>- key in table to update </td></tr>
+    <tr><td class="paramname">value</td><td>- data to store in table </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a09ccdce78d18e44e22dc3371035bed20"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBackupPacket.html">BackupPacket</a>&lt; K, V &gt;::<a class="el" href="classBackupPacket.html">BackupPacket</a> </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>rawData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a pacekt from raw data (receiver side)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rawData</td><td>- bytes received to be decoded </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a36d0369d548f537a12840627a9fabbfd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K <a class="el" href="classBackupPacket.html">BackupPacket</a>&lt; K, V &gt;::getKey </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get key value of packet</p>
+<dl class="section return"><dt>Returns</dt><dd>key </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3bdc1916566a9cffbdd26abe5c87bdad"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classBackupPacket.html">BackupPacket</a>&lt; K, V &gt;::getPacketSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get size of packet</p>
+<dl class="section return"><dt>Returns</dt><dd>packet size </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a35e76302bebf4a0e6c871426844553fc"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">V <a class="el" href="classBackupPacket.html">BackupPacket</a>&lt; K, V &gt;::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get data value of packet</p>
+<dl class="section return"><dt>Returns</dt><dd>value </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a626af7de776bd98ea1a322a4e9fd87bd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* <a class="el" href="classBackupPacket.html">BackupPacket</a>&lt; K, V &gt;::serialize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Serialize packet into raw bytes</p>
+<dl class="section return"><dt>Returns</dt><dd>raw byte string to send on wire </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/root/cjdambro/grad-school/CSE498/gits/fault-tolerance/include/<a class="el" href="fault__tolerance_8h_source.html">fault_tolerance.h</a></li>
 </ul>

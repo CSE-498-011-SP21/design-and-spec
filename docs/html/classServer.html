@@ -88,6 +88,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Server Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="fault__tolerance_8h_source.html">fault_tolerance.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Server:</div>
 <div class="dyncontent">
@@ -102,6 +104,8 @@ Inheritance diagram for Server:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae94d08657f48a3b51b411463f1137375"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ae94d08657f48a3b51b411463f1137375">initialize</a> ()</td></tr>
 <tr class="separator:ae94d08657f48a3b51b411463f1137375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ce7fd6ac1a1f940db29e57f5f33ae9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a4ce7fd6ac1a1f940db29e57f5f33ae9b">shutdownServer</a> ()</td></tr>
+<tr class="separator:a4ce7fd6ac1a1f940db29e57f5f33ae9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad303d839086eee11137e6fc4a4bb95ab"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; int, <br class="typebreak"/>
 int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">getPrimaryKeys</a> ()</td></tr>
 <tr class="separator:ad303d839086eee11137e6fc4a4bb95ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,16 +119,18 @@ int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <tr class="separator:ab272570a3b1d8eb7f9037c9e7b4e5f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bd7a3b2b12f2f5bddd68eb245111d02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a9bd7a3b2b12f2f5bddd68eb245111d02">isPrimary</a> (int key)</td></tr>
 <tr class="separator:a9bd7a3b2b12f2f5bddd68eb245111d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17fd9b41cd477cd9aafd19ac7edc1183"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a17fd9b41cd477cd9aafd19ac7edc1183">log_put</a> (int key, size_t valueSize, char *value)</td></tr>
-<tr class="separator:a17fd9b41cd477cd9aafd19ac7edc1183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb4289a5db1c23ac566dbb085a8f91fb"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:afb4289a5db1c23ac566dbb085a8f91fb"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classServer.html#afb4289a5db1c23ac566dbb085a8f91fb">log_put</a> (K key, V value)</td></tr>
+<tr class="separator:afb4289a5db1c23ac566dbb085a8f91fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae419ba1245066b80f42302bb0c86ed00"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:ae419ba1245066b80f42302bb0c86ed00"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classServer.html#ae419ba1245066b80f42302bb0c86ed00">log_put</a> (std::vector&lt; K &gt; keys, std::vector&lt; V &gt; values)</td></tr>
+<tr class="separator:ae419ba1245066b80f42302bb0c86ed00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adecf34082977620ca31ca8eab317cf6d"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#adecf34082977620ca31ca8eab317cf6d">getHash</a> ()</td></tr>
 <tr class="separator:adecf34082977620ca31ca8eab317cf6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNode"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNode')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNode.html">Node</a></td></tr>
-<tr class="memitem:af79916b6bb2580b7cf9397bdeb172988 inherit pub_methods_classNode"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af79916b6bb2580b7cf9397bdeb172988"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (std::string n)</td></tr>
+<tr class="memitem:af79916b6bb2580b7cf9397bdeb172988 inherit pub_methods_classNode"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNode.html#af79916b6bb2580b7cf9397bdeb172988">setName</a> (std::string n)</td></tr>
 <tr class="separator:af79916b6bb2580b7cf9397bdeb172988 inherit pub_methods_classNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e5ac6b5881a3a9d82f3112953c1e546 inherit pub_methods_classNode"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e5ac6b5881a3a9d82f3112953c1e546"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="memitem:a3e5ac6b5881a3a9d82f3112953c1e546 inherit pub_methods_classNode"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNode.html#a3e5ac6b5881a3a9d82f3112953c1e546">getName</a> ()</td></tr>
 <tr class="separator:a3e5ac6b5881a3a9d82f3112953c1e546 inherit pub_methods_classNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a821b0d4eb044c0ee3a61a3a1faadbe9f inherit pub_methods_classNode"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a821b0d4eb044c0ee3a61a3a1faadbe9f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="classNode.html">Node</a> &amp;o) const </td></tr>
@@ -137,7 +143,9 @@ Additional Inherited Members</h2></td></tr>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></td></tr>
 <tr class="separator:a9f5a57e15567a0b92cb8d25bcec7bd24 inherit pro_attribs_classNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classServer.html">Server</a> <a class="el" href="classNode.html">Node</a> definition </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ab272570a3b1d8eb7f9037c9e7b4e5f2a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -158,7 +166,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>bool - true if added successfully, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if added successfully, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -178,11 +186,11 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
 <p>Add key range to primary list</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">keyRange</td><td>- std::pair&lt;int, int&gt; of min and max key</td></tr>
+    <tr><td class="paramname">keyRange</td><td>- pair of min and max key</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>bool - true if added successfully, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if added successfully, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -206,7 +214,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>bool - true if added successfully, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if added successfully, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -231,13 +239,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
 </table>
 </div><div class="memdoc">
 <p>Get list of servers acting as this one's backup</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;Server*&gt; - list of backup servers </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>vector of backup servers </dd></dl>
 
 </div>
 </div>
@@ -254,12 +256,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
       </table>
 </div><div class="memdoc">
 <p>Get a hash value of this server configuration</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>hash of the server </dd></dl>
 
 </div>
 </div>
@@ -284,12 +281,6 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
 </table>
 </div><div class="memdoc">
 <p>Get vector of primary key ranges</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>vector of min/max key range pairs </dd></dl>
 
 </div>
@@ -315,15 +306,9 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
 </table>
 </div><div class="memdoc">
 <p>Initialize server</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>integer </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>status. 0 on success, non-zero otherwise. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classNode.html">Node</a>.</p>
+<p>Reimplemented from <a class="el" href="classNode.html#acfbc12d3b7d414fb12811041b04a1809">Node</a>.</p>
 
 </div>
 </div>
@@ -341,36 +326,29 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
       </table>
 </div><div class="memdoc">
 <p>Check if server is running as primary for a given key</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>bool - true if primary, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if primary, false otherwise </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a17fd9b41cd477cd9aafd19ac7edc1183"></a>
+<a class="anchor" id="afb4289a5db1c23ac566dbb085a8f91fb"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int Server::log_put </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">K&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>valueSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">V&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -379,17 +357,82 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>hostname</b></
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Log a PUT transaction to all backup servers.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>- int value of key in table </td></tr>
-    <tr><td class="paramname">valueSize</td><td>- size of value being added </td></tr>
+    <tr><td class="paramname">key</td><td>- value of key in table </td></tr>
     <tr><td class="paramname">value</td><td>- data to store in table at key</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int - 0 on success, non-zero on failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae419ba1245066b80f42302bb0c86ed00"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Server::log_put </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; K &gt;&#160;</td>
+          <td class="paramname"><em>keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; V &gt;&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Log a batch of PUT transactions to backup servers.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keys</td><td>- vector of keys to update </td></tr>
+    <tr><td class="paramname">values</td><td>- vector of data to store at keys</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4ce7fd6ac1a1f940db29e57f5f33ae9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::shutdownServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Shutdown server </p>
 
 </div>
 </div>

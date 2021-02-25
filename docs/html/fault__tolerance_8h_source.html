@@ -95,104 +95,198 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef FAULT_TOLERANCE_H</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define FAULT_TOLERANCE_H</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;kvcg_logging.h&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">extern</span> std::string CFG_FILE;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// TODO: Work with Networking-Layer on this</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// TODO: Handle multiple keys</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classBackupPacket.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBackupPacket.html">BackupPacket</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="classBackupPacket.html">BackupPacket</a>(<span class="keywordtype">int</span> key, <span class="keywordtype">size_t</span> valueSize, <span class="keywordtype">char</span>* value); <span class="comment">// sender side</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="classBackupPacket.html">BackupPacket</a>(<span class="keywordtype">char</span>* rawData); <span class="comment">// receiver side</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keywordtype">char</span>* serialize();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">int</span> key;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">size_t</span> valueSize;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">char</span>* value;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Base class</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classNode.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNode.html">Node</a> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  std::string hostname;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">int</span> initialize() { <span class="keywordflow">return</span> 0; }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> setName(std::string n) { hostname = n; }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  std::string getName() { <span class="keywordflow">return</span> hostname; }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">bool</span> operator &lt; (<span class="keyword">const</span> <a class="code" href="classNode.html">Node</a>&amp; o)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hostname &lt; o.hostname; }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// FIXME: This is placeholder for network-layer </span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structnet__data__t.html">   51</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnet__data__t.html">net_data_t</a> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">int</span> server_fd;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">struct </span>sockaddr_in address;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">int</span> socket; <span class="comment">// used for Server instances of backups</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classServer.html">   57</a></span>&#160;<span class="keyword">class </span><a class="code" href="classServer.html">Server</a>: <span class="keyword">public</span> <a class="code" href="classNode.html">Node</a> {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  std::vector&lt;std::pair&lt;int, int&gt;&gt; primaryKeys; <span class="comment">// primary key ranges</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  std::vector&lt;Server*&gt; backupServers; <span class="comment">// servers backing up this ones primaries</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  std::vector&lt;Server*&gt; primaryServers; <span class="comment">// servers whose keys this one is backing up</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;boost/range/combine.hpp&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;kvcg_logging.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">extern</span> std::string CFG_FILE;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// TODO: Work with Networking-Layer on this</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// TODO: Handle multiple keys</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classBackupPacket.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBackupPacket.html">BackupPacket</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classBackupPacket.html#a26f60ca0db42e0bc9e7c0aa3df6e561f">   47</a></span>&#160;  <a class="code" href="classBackupPacket.html#a26f60ca0db42e0bc9e7c0aa3df6e561f">BackupPacket</a>(K key, V value) { <span class="comment">// sender side</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    this-&gt;key = key;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    this-&gt;value = value;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classBackupPacket.html#a09ccdce78d18e44e22dc3371035bed20">   59</a></span>&#160;  <a class="code" href="classBackupPacket.html#a09ccdce78d18e44e22dc3371035bed20">BackupPacket</a>(<span class="keywordtype">char</span>* rawData) { <span class="comment">// receiver side</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      memcpy(&amp;this-&gt;key, rawData, <span class="keyword">sizeof</span>(K));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      memcpy(&amp;this-&gt;value, rawData+<span class="keyword">sizeof</span>(K), <span class="keyword">sizeof</span>(V));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="structnet__data__t.html">net_data_t</a> net_data;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">void</span> server_listen();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> connHandle(<span class="keywordtype">int</span> socket);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">int</span> open_backup_endpoints();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">int</span> open_client_endpoint();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">int</span> connect_backups();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classServer.html#ae94d08657f48a3b51b411463f1137375">initialize</a>();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">   94</a></span>&#160;  std::vector&lt;std::pair&lt;int, int&gt;&gt; <a class="code" href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">getPrimaryKeys</a>() { <span class="keywordflow">return</span> primaryKeys; }</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classBackupPacket.html#a626af7de776bd98ea1a322a4e9fd87bd">   71</a></span>&#160;  <span class="keywordtype">char</span>* <a class="code" href="classBackupPacket.html#a626af7de776bd98ea1a322a4e9fd87bd">serialize</a>() {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">char</span>* rawData = (<span class="keywordtype">char</span>*) malloc(<span class="keyword">sizeof</span>(key) + <span class="keyword">sizeof</span>(value));</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    memcpy(rawData, (<span class="keywordtype">char</span>*)&amp;key, <span class="keyword">sizeof</span>(key));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    memcpy(rawData+<span class="keyword">sizeof</span>(key), (<span class="keywordtype">char</span>*)&amp;value, <span class="keyword">sizeof</span>(value));</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> rawData;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classBackupPacket.html#a36d0369d548f537a12840627a9fabbfd">   85</a></span>&#160;  K <a class="code" href="classBackupPacket.html#a36d0369d548f537a12840627a9fabbfd">getKey</a>() { <span class="keywordflow">return</span> key; }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classBackupPacket.html#a35e76302bebf4a0e6c871426844553fc">   94</a></span>&#160;  V <a class="code" href="classBackupPacket.html#a35e76302bebf4a0e6c871426844553fc">getValue</a>() { <span class="keywordflow">return</span> value; }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a395d7cb7194064c961710663926e4a3d">addKeyRange</a>(std::pair&lt;int, int&gt; keyRange);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a2f865f52beecb3be03eda85b4dc64e3e">addPrimaryServer</a>(<a class="code" href="classServer.html">Server</a>* s);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classServer.html#a71a34c248da1cb74f3453f06223a606e">  127</a></span>&#160;  std::vector&lt;Server*&gt; <a class="code" href="classServer.html#a71a34c248da1cb74f3453f06223a606e">getBackupServers</a>() { <span class="keywordflow">return</span> backupServers; }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#ab272570a3b1d8eb7f9037c9e7b4e5f2a">addBackupServer</a>(<a class="code" href="classServer.html">Server</a>* s);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a9bd7a3b2b12f2f5bddd68eb245111d02">isPrimary</a>(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classServer.html#a17fd9b41cd477cd9aafd19ac7edc1183">log_put</a>(<span class="keywordtype">int</span> key, <span class="keywordtype">size_t</span> valueSize, <span class="keywordtype">char</span>* value);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  std::size_t <a class="code" href="classServer.html#adecf34082977620ca31ca8eab317cf6d">getHash</a>();</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;};</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classClient.html">  175</a></span>&#160;<span class="keyword">class </span><a class="code" href="classClient.html">Client</a>: <span class="keyword">public</span> <a class="code" href="classNode.html">Node</a> {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classClient.html#a5de857af6e3c568925ecd342314617d7">initialize</a>();</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;};</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="preprocessor">#endif // FAULT_TOLERANCE_H</span></div>
-<div class="ttc" id="classServer_html_ad303d839086eee11137e6fc4a4bb95ab"><div class="ttname"><a href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">Server::getPrimaryKeys</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; int, int &gt; &gt; getPrimaryKeys()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:94</div></div>
-<div class="ttc" id="classServer_html"><div class="ttname"><a href="classServer.html">Server</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:57</div></div>
-<div class="ttc" id="classNode_html"><div class="ttname"><a href="classNode.html">Node</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:40</div></div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classBackupPacket.html#a3bdc1916566a9cffbdd26abe5c87bdad">  103</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classBackupPacket.html#a3bdc1916566a9cffbdd26abe5c87bdad">getPacketSize</a>() {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">size_t</span> pktSize = <span class="keyword">sizeof</span>(key) + <span class="keyword">sizeof</span>(value);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">return</span> pktSize;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  K key;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  V value;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classNode.html">  118</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNode.html">Node</a> {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  std::string hostname;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classNode.html#acfbc12d3b7d414fb12811041b04a1809">  125</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classNode.html#acfbc12d3b7d414fb12811041b04a1809">initialize</a>() { <span class="keywordflow">return</span> 0; }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classNode.html#af79916b6bb2580b7cf9397bdeb172988">  134</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classNode.html#af79916b6bb2580b7cf9397bdeb172988">setName</a>(std::string n) { hostname = n; }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classNode.html#a3e5ac6b5881a3a9d82f3112953c1e546">  143</a></span>&#160;  std::string <a class="code" href="classNode.html#a3e5ac6b5881a3a9d82f3112953c1e546">getName</a>() { <span class="keywordflow">return</span> hostname; }</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keywordtype">bool</span> operator &lt; (<span class="keyword">const</span> <a class="code" href="classNode.html">Node</a>&amp; o)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hostname &lt; o.hostname; }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;};</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">// FIXME: This is placeholder for network-layer </span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="structnet__data__t.html">  149</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnet__data__t.html">net_data_t</a> {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">int</span> server_fd;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keyword">struct </span>sockaddr_in address;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keywordtype">int</span> socket; <span class="comment">// used for Server instances of backups</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;};</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classServer.html">  160</a></span>&#160;<span class="keyword">class </span><a class="code" href="classServer.html">Server</a>: <span class="keyword">public</span> <a class="code" href="classNode.html">Node</a> {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  std::vector&lt;std::pair&lt;int, int&gt;&gt; primaryKeys; <span class="comment">// primary key ranges</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  std::vector&lt;Server*&gt; backupServers; <span class="comment">// servers backing up this ones primaries</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  std::vector&lt;Server*&gt; primaryServers; <span class="comment">// servers whose keys this one is backing up</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <a class="code" href="structnet__data__t.html">net_data_t</a> net_data;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  std::thread *client_listen_thread = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  std::vector&lt;std::thread*&gt; primary_listen_threads;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordtype">void</span> client_listen(); <span class="comment">// listen for client connections</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">void</span> primary_listen(<a class="code" href="classServer.html">Server</a>* pserver); <span class="comment">// listen for backup request from another primary</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">void</span> connHandle(<span class="keywordtype">int</span> socket);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">int</span> open_backup_endpoints();</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordtype">int</span> open_client_endpoint();</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keywordtype">int</span> connect_backups();</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  ~<a class="code" href="classServer.html">Server</a>() { <a class="code" href="classServer.html#a4ce7fd6ac1a1f940db29e57f5f33ae9b">shutdownServer</a>(); }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classServer.html#ae94d08657f48a3b51b411463f1137375">initialize</a>();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classServer.html#a4ce7fd6ac1a1f940db29e57f5f33ae9b">shutdownServer</a>();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">  205</a></span>&#160;  std::vector&lt;std::pair&lt;int, int&gt;&gt; <a class="code" href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">getPrimaryKeys</a>() { <span class="keywordflow">return</span> primaryKeys; }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a395d7cb7194064c961710663926e4a3d">addKeyRange</a>(std::pair&lt;int, int&gt; keyRange);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a2f865f52beecb3be03eda85b4dc64e3e">addPrimaryServer</a>(<a class="code" href="classServer.html">Server</a>* s);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="classServer.html#a71a34c248da1cb74f3453f06223a606e">  236</a></span>&#160;  std::vector&lt;Server*&gt; <a class="code" href="classServer.html#a71a34c248da1cb74f3453f06223a606e">getBackupServers</a>() { <span class="keywordflow">return</span> backupServers; }</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#ab272570a3b1d8eb7f9037c9e7b4e5f2a">addBackupServer</a>(<a class="code" href="classServer.html">Server</a>* s);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a9bd7a3b2b12f2f5bddd68eb245111d02">isPrimary</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="classServer.html#afb4289a5db1c23ac566dbb085a8f91fb">  270</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classServer.html#afb4289a5db1c23ac566dbb085a8f91fb">log_put</a>(K key, V value) {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="comment">// Send transaction to backups</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <a class="code" href="classLOG.html">LOG</a>(INFO) &lt;&lt; <span class="stringliteral">&quot;Logging PUT (&quot;</span> &lt;&lt; key &lt;&lt; <span class="stringliteral">&quot;): &quot;</span> &lt;&lt; value;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <a class="code" href="classBackupPacket.html">BackupPacket&lt;K,V&gt;</a> pkt(key, value);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">char</span>* rawData = pkt.<a class="code" href="classBackupPacket.html#a626af7de776bd98ea1a322a4e9fd87bd">serialize</a>();</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordtype">size_t</span> dataSize = pkt.<a class="code" href="classBackupPacket.html#a3bdc1916566a9cffbdd26abe5c87bdad">getPacketSize</a>();</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <a class="code" href="classLOG.html">LOG</a>(DEBUG4) &lt;&lt; <span class="stringliteral">&quot;raw data: &quot;</span> &lt;&lt; rawData;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <a class="code" href="classLOG.html">LOG</a>(DEBUG4) &lt;&lt; <span class="stringliteral">&quot;data size: &quot;</span> &lt;&lt; dataSize;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="comment">// TODO: Backup in parallel - dependent on network-layer</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="comment">// datagram support</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> backup : backupServers) {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <a class="code" href="classLOG.html">LOG</a>(DEBUG) &lt;&lt; <span class="stringliteral">&quot;Backing up to &quot;</span> &lt;&lt; backup-&gt;getName();</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        send(backup-&gt;net_data.socket, rawData, dataSize, 0);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    }</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="classServer.html#ae419ba1245066b80f42302bb0c86ed00">  301</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classServer.html#ae419ba1245066b80f42302bb0c86ed00">log_put</a>(std::vector&lt;K&gt; keys, std::vector&lt;V&gt; values) {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="comment">// Send batch of transactions to backups</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="comment">//TODO: Validate lengths match of keys/values</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="comment">// TODO: Parallelize</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> tup : boost::combine(keys, values)) {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        K key;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        V value;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        boost::tie(key, value) = tup;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <a class="code" href="classLOG.html">LOG</a>(INFO) &lt;&lt; <span class="stringliteral">&quot;Logging PUT (&quot;</span> &lt;&lt; key &lt;&lt; <span class="stringliteral">&quot;): &quot;</span> &lt;&lt; value;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <a class="code" href="classBackupPacket.html">BackupPacket&lt;K,V&gt;</a> pkt(key, value);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordtype">char</span>* rawData = pkt.<a class="code" href="classBackupPacket.html#a626af7de776bd98ea1a322a4e9fd87bd">serialize</a>();</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordtype">size_t</span> dataSize = pkt.<a class="code" href="classBackupPacket.html#a3bdc1916566a9cffbdd26abe5c87bdad">getPacketSize</a>();</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <a class="code" href="classLOG.html">LOG</a>(DEBUG4) &lt;&lt; <span class="stringliteral">&quot;raw data: &quot;</span> &lt;&lt; rawData;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <a class="code" href="classLOG.html">LOG</a>(DEBUG4) &lt;&lt; <span class="stringliteral">&quot;data size: &quot;</span> &lt;&lt; dataSize;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="comment">// TODO: Backup in parallel - dependent on network-layer</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="comment">// datagram support</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> backup : backupServers) {</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <a class="code" href="classLOG.html">LOG</a>(DEBUG) &lt;&lt; <span class="stringliteral">&quot;Backing up to &quot;</span> &lt;&lt; backup-&gt;getName();</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            send(backup-&gt;net_data.socket, rawData, dataSize, 0);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  }</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  std::size_t <a class="code" href="classServer.html#adecf34082977620ca31ca8eab317cf6d">getHash</a>();</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;};</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
+<div class="line"><a name="l00344"></a><span class="lineno"><a class="line" href="classClient.html">  344</a></span>&#160;<span class="keyword">class </span><a class="code" href="classClient.html">Client</a>: <span class="keyword">public</span> <a class="code" href="classNode.html">Node</a> {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classClient.html#a5de857af6e3c568925ecd342314617d7">initialize</a>();</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;};</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#endif // FAULT_TOLERANCE_H</span></div>
+<div class="ttc" id="classServer_html_ad303d839086eee11137e6fc4a4bb95ab"><div class="ttname"><a href="classServer.html#ad303d839086eee11137e6fc4a4bb95ab">Server::getPrimaryKeys</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; int, int &gt; &gt; getPrimaryKeys()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:205</div></div>
+<div class="ttc" id="classServer_html"><div class="ttname"><a href="classServer.html">Server</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:160</div></div>
+<div class="ttc" id="classServer_html_afb4289a5db1c23ac566dbb085a8f91fb"><div class="ttname"><a href="classServer.html#afb4289a5db1c23ac566dbb085a8f91fb">Server::log_put</a></div><div class="ttdeci">int log_put(K key, V value)</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:270</div></div>
+<div class="ttc" id="classNode_html"><div class="ttname"><a href="classNode.html">Node</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:118</div></div>
+<div class="ttc" id="classServer_html_a4ce7fd6ac1a1f940db29e57f5f33ae9b"><div class="ttname"><a href="classServer.html#a4ce7fd6ac1a1f940db29e57f5f33ae9b">Server::shutdownServer</a></div><div class="ttdeci">void shutdownServer()</div></div>
+<div class="ttc" id="classBackupPacket_html_a36d0369d548f537a12840627a9fabbfd"><div class="ttname"><a href="classBackupPacket.html#a36d0369d548f537a12840627a9fabbfd">BackupPacket::getKey</a></div><div class="ttdeci">K getKey()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:85</div></div>
 <div class="ttc" id="classServer_html_ae94d08657f48a3b51b411463f1137375"><div class="ttname"><a href="classServer.html#ae94d08657f48a3b51b411463f1137375">Server::initialize</a></div><div class="ttdeci">int initialize()</div></div>
 <div class="ttc" id="classClient_html_a5de857af6e3c568925ecd342314617d7"><div class="ttname"><a href="classClient.html#a5de857af6e3c568925ecd342314617d7">Client::initialize</a></div><div class="ttdeci">int initialize()</div></div>
-<div class="ttc" id="classBackupPacket_html"><div class="ttname"><a href="classBackupPacket.html">BackupPacket</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:27</div></div>
+<div class="ttc" id="classNode_html_af79916b6bb2580b7cf9397bdeb172988"><div class="ttname"><a href="classNode.html#af79916b6bb2580b7cf9397bdeb172988">Node::setName</a></div><div class="ttdeci">void setName(std::string n)</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:134</div></div>
+<div class="ttc" id="classBackupPacket_html_a26f60ca0db42e0bc9e7c0aa3df6e561f"><div class="ttname"><a href="classBackupPacket.html#a26f60ca0db42e0bc9e7c0aa3df6e561f">BackupPacket::BackupPacket</a></div><div class="ttdeci">BackupPacket(K key, V value)</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:47</div></div>
+<div class="ttc" id="classBackupPacket_html"><div class="ttname"><a href="classBackupPacket.html">BackupPacket</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:37</div></div>
+<div class="ttc" id="classBackupPacket_html_a35e76302bebf4a0e6c871426844553fc"><div class="ttname"><a href="classBackupPacket.html#a35e76302bebf4a0e6c871426844553fc">BackupPacket::getValue</a></div><div class="ttdeci">V getValue()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:94</div></div>
+<div class="ttc" id="classNode_html_a3e5ac6b5881a3a9d82f3112953c1e546"><div class="ttname"><a href="classNode.html#a3e5ac6b5881a3a9d82f3112953c1e546">Node::getName</a></div><div class="ttdeci">std::string getName()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:143</div></div>
 <div class="ttc" id="classServer_html_ab272570a3b1d8eb7f9037c9e7b4e5f2a"><div class="ttname"><a href="classServer.html#ab272570a3b1d8eb7f9037c9e7b4e5f2a">Server::addBackupServer</a></div><div class="ttdeci">bool addBackupServer(Server *s)</div></div>
-<div class="ttc" id="classClient_html"><div class="ttname"><a href="classClient.html">Client</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:175</div></div>
-<div class="ttc" id="classServer_html_a17fd9b41cd477cd9aafd19ac7edc1183"><div class="ttname"><a href="classServer.html#a17fd9b41cd477cd9aafd19ac7edc1183">Server::log_put</a></div><div class="ttdeci">int log_put(int key, size_t valueSize, char *value)</div></div>
+<div class="ttc" id="classNode_html_acfbc12d3b7d414fb12811041b04a1809"><div class="ttname"><a href="classNode.html#acfbc12d3b7d414fb12811041b04a1809">Node::initialize</a></div><div class="ttdeci">virtual int initialize()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:125</div></div>
+<div class="ttc" id="classClient_html"><div class="ttname"><a href="classClient.html">Client</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:344</div></div>
 <div class="ttc" id="classServer_html_a9bd7a3b2b12f2f5bddd68eb245111d02"><div class="ttname"><a href="classServer.html#a9bd7a3b2b12f2f5bddd68eb245111d02">Server::isPrimary</a></div><div class="ttdeci">bool isPrimary(int key)</div></div>
 <div class="ttc" id="classServer_html_a2f865f52beecb3be03eda85b4dc64e3e"><div class="ttname"><a href="classServer.html#a2f865f52beecb3be03eda85b4dc64e3e">Server::addPrimaryServer</a></div><div class="ttdeci">bool addPrimaryServer(Server *s)</div></div>
-<div class="ttc" id="classServer_html_a71a34c248da1cb74f3453f06223a606e"><div class="ttname"><a href="classServer.html#a71a34c248da1cb74f3453f06223a606e">Server::getBackupServers</a></div><div class="ttdeci">std::vector&lt; Server * &gt; getBackupServers()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:127</div></div>
+<div class="ttc" id="classServer_html_a71a34c248da1cb74f3453f06223a606e"><div class="ttname"><a href="classServer.html#a71a34c248da1cb74f3453f06223a606e">Server::getBackupServers</a></div><div class="ttdeci">std::vector&lt; Server * &gt; getBackupServers()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:236</div></div>
 <div class="ttc" id="classServer_html_adecf34082977620ca31ca8eab317cf6d"><div class="ttname"><a href="classServer.html#adecf34082977620ca31ca8eab317cf6d">Server::getHash</a></div><div class="ttdeci">std::size_t getHash()</div></div>
-<div class="ttc" id="structnet__data__t_html"><div class="ttname"><a href="structnet__data__t.html">net_data_t</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:51</div></div>
+<div class="ttc" id="structnet__data__t_html"><div class="ttname"><a href="structnet__data__t.html">net_data_t</a></div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:149</div></div>
+<div class="ttc" id="classBackupPacket_html_a09ccdce78d18e44e22dc3371035bed20"><div class="ttname"><a href="classBackupPacket.html#a09ccdce78d18e44e22dc3371035bed20">BackupPacket::BackupPacket</a></div><div class="ttdeci">BackupPacket(char *rawData)</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:59</div></div>
 <div class="ttc" id="classServer_html_a395d7cb7194064c961710663926e4a3d"><div class="ttname"><a href="classServer.html#a395d7cb7194064c961710663926e4a3d">Server::addKeyRange</a></div><div class="ttdeci">bool addKeyRange(std::pair&lt; int, int &gt; keyRange)</div></div>
+<div class="ttc" id="classServer_html_ae419ba1245066b80f42302bb0c86ed00"><div class="ttname"><a href="classServer.html#ae419ba1245066b80f42302bb0c86ed00">Server::log_put</a></div><div class="ttdeci">int log_put(std::vector&lt; K &gt; keys, std::vector&lt; V &gt; values)</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:301</div></div>
+<div class="ttc" id="classBackupPacket_html_a626af7de776bd98ea1a322a4e9fd87bd"><div class="ttname"><a href="classBackupPacket.html#a626af7de776bd98ea1a322a4e9fd87bd">BackupPacket::serialize</a></div><div class="ttdeci">char * serialize()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:71</div></div>
+<div class="ttc" id="classLOG_html"><div class="ttname"><a href="classLOG.html">LOG</a></div><div class="ttdef"><b>Definition:</b> kvcg_logging.h:40</div></div>
+<div class="ttc" id="classBackupPacket_html_a3bdc1916566a9cffbdd26abe5c87bdad"><div class="ttname"><a href="classBackupPacket.html#a3bdc1916566a9cffbdd26abe5c87bdad">BackupPacket::getPacketSize</a></div><div class="ttdeci">size_t getPacketSize()</div><div class="ttdef"><b>Definition:</b> fault_tolerance.h:103</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

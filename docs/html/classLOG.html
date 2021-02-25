@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>KVCG Fault Tolerance: LOG Class Reference</title>
+<title>CSE-498-011-SP21: LOG Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">KVCG Fault Tolerance
+   <div id="projectname">CSE-498-011-SP21
    </div>
   </td>
  </tr>
@@ -61,6 +61,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -101,10 +103,13 @@ template&lt;class T &gt; </td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>LOGGING CLASS</p>
-<p>TODO: Move to common repo. TODO: Log to file as well. TBD: std::cout vs std::cerr</p>
-<p>No promises on thread safety... </p>
+<p>Meant to be used in place of cout/cerr. To use, set LOG_LEVEL to desired level. It can be changed at runtime as well. a message will only be displayed if LOG_LEVEL is set above it. To invoke, use just as cout/cerr -</p>
+<p><a class="el" href="classLOG.html">LOG(INFO)</a> &lt;&lt; "x is " &lt;&lt; x;</p>
+<p>Note: No endl needed, added automatically.</p>
+<p>No promises on thread safety...</p>
+<p>TBD: Log to file as well? TBD: Ever use stdout? Use stderr for unbuffered </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>/root/cjdambro/grad-school/CSE498/gits/fault-tolerance/include/<a class="el" href="kvcg__logging_8h_source.html">kvcg_logging.h</a></li>
+<li>/root/cjdambro/grad-school/CSE498/gits/fault-tolerance/common/include/<a class="el" href="kvcg__logging_8h_source.html">kvcg_logging.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -83,31 +83,92 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classKVCGConfig-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">KVCGConfig Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="kvcg__config_8h_source.html">kvcg_config.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a47206f279489aacccb9200f0bf9b36cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47206f279489aacccb9200f0bf9b36cf"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>parse_json_file</b> (std::string filename)</td></tr>
+<tr class="memitem:a47206f279489aacccb9200f0bf9b36cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKVCGConfig.html#a47206f279489aacccb9200f0bf9b36cf">parse_json_file</a> (std::string filename)</td></tr>
 <tr class="separator:a47206f279489aacccb9200f0bf9b36cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873ecf819a05b79ccced5e5dada7843f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a873ecf819a05b79ccced5e5dada7843f"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_checksum</b> ()</td></tr>
+<tr class="memitem:a873ecf819a05b79ccced5e5dada7843f"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKVCGConfig.html#a873ecf819a05b79ccced5e5dada7843f">get_checksum</a> ()</td></tr>
 <tr class="separator:a873ecf819a05b79ccced5e5dada7843f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61fb9cd072f12acd361c7bed3936bd4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61fb9cd072f12acd361c7bed3936bd4b"></a>
-std::vector&lt; <a class="el" href="classServer.html">Server</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getServerList</b> ()</td></tr>
+<tr class="memitem:a61fb9cd072f12acd361c7bed3936bd4b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classServer.html">Server</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKVCGConfig.html#a61fb9cd072f12acd361c7bed3936bd4b">getServerList</a> ()</td></tr>
 <tr class="separator:a61fb9cd072f12acd361c7bed3936bd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ac399247c83fe9753fd6708330066cc4d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac399247c83fe9753fd6708330066cc4d"></a>
-std::vector&lt; <a class="el" href="classServer.html">Server</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>serverList</b></td></tr>
-<tr class="separator:ac399247c83fe9753fd6708330066cc4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to parse config file and store data </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a873ecf819a05b79ccced5e5dada7843f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t KVCGConfig::get_checksum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calculate and return a checksum for the configuration.</p>
+<dl class="section return"><dt>Returns</dt><dd>hash of config file </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a61fb9cd072f12acd361c7bed3936bd4b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classServer.html">Server</a>*&gt; KVCGConfig::getServerList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get list of servers parsed from config.</p>
+<dl class="section return"><dt>Returns</dt><dd>vector of Servers </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a47206f279489aacccb9200f0bf9b36cf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int KVCGConfig::parse_json_file </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Parse JSON input file</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>- name of JSON file to parse</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status. 0 on success, non-zero otherwise. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/root/cjdambro/grad-school/CSE498/gits/fault-tolerance/include/<a class="el" href="kvcg__config_8h_source.html">kvcg_config.h</a></li>
 </ul>
