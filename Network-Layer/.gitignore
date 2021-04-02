@@ -1,0 +1,8 @@
+/theories/*.vo
+/theories/*.aux
+/theories/*.glob
+/theories/*.vok
+/theories/*.vos
+/.CoqMakefile.d
+/CoqMakefile.conf
+/Makefile.coq
