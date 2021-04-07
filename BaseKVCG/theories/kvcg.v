@@ -62,10 +62,10 @@ end.
 Definition find (k : nat) (f : nat -> option nat) : option nat :=
 f k.
 
-Definition atomicGet (key : nat) (k : kvcg) : nat := 
+Definition atomicGet (key : nat) (k : kvcg) : prod nat kvcg := 
 match (getModel k) key with
-| true => optionNatTo0 (find key (getHotcache k))
-| false => optionNatTo0 (find key (getCstore k))
+| true => pair (optionNatTo0 (find key (getHotcache k))) k
+| false => pair (optionNatTo0 (find key (getCstore k))) k
 end.
 
 Lemma modelConstantAcrossMod : forall (key : nat) (k : kvcg),
@@ -167,7 +167,7 @@ Proof.
 Qed.
 
 Lemma immediateGetReturnsLastUpdate : forall (key : nat) (k : kvcg),
-atomicGet key (atomicModify key k) = S (getTs k).
+fst (atomicGet key (atomicModify key k)) = S (getTs k).
 Proof.
     intros.
     unfold atomicGet.
@@ -178,11 +178,11 @@ Proof.
     - simpl. rewrite findAddLemma. auto.
 Qed.
 
-Fixpoint doListOfModifcations (l : list nat) (k : kvcg) := 
-match l with
-| nil => k
-| x :: l' => doListOfModifcations l' (atomicModify x k)
-end.
+Definition doListOfModifcations (l : list nat) (k : kvcg) : kvcg := 
+fold_left (fun (y : kvcg) (x : nat) => (atomicModify x y)) l k.
+
+Definition doListOfGets (l : list nat) (k : kvcg) : kvcg := 
+fold_left (fun (y : kvcg) (x : nat) => snd (atomicGet x y)) l k.
 
 Lemma modelConstantAcrossListMod : forall (keys : list nat) (k : kvcg),
 getModel (doListOfModifcations keys k) = getModel k.
@@ -206,7 +206,7 @@ Fixpoint In (a: nat) (l:list nat) : Prop :=
     end.
 
 Lemma getReturnsLastUpdateFrom2 : forall (key key2 ts : nat) (k : kvcg),
-(key <> key2) /\ (ts = getTs k) -> atomicGet key (atomicModify key2 (atomicModify key k)) = S (ts).
+(key <> key2) /\ (ts = getTs k) -> fst (atomicGet key (atomicModify key2 (atomicModify key k))) = S (ts).
 Proof.
     intros.
     destruct H.
@@ -243,4 +243,84 @@ Proof.
       rewrite H0.
       simpl.
       reflexivity.
+Qed.
+
+Definition getCStoreOps (batch : list (prod nat bool)) (k : kvcg) : list (prod nat bool) := 
+flat_map (fun x => if getModel k (fst x) then nil else cons x nil ) batch.
+
+Definition getHotCacheOps (batch : list (prod nat bool)) (k : kvcg) : list (prod nat bool) := 
+flat_map (fun x => if getModel k (fst x) then cons x nil else nil) batch.
+
+Definition getLinerizationOfModifyOps (batch : list (prod nat bool)) : list nat :=
+flat_map (fun x : prod nat bool => if snd x then cons (fst x) nil else nil) batch.
+
+Definition getReadOps (batch : list (prod nat bool)) : list nat :=
+flat_map (fun x : prod nat bool => if snd x then nil else cons (fst x) nil) batch.
+
+Definition executeUpdateThenGet (batch : list(prod nat bool)) (k : kvcg) : kvcg :=
+doListOfGets (getReadOps batch) (doListOfModifcations (getLinerizationOfModifyOps batch) k).
+
+Definition executeUpdate (batch : list(prod nat bool)) (k : kvcg) : kvcg :=
+(doListOfModifcations (getLinerizationOfModifyOps batch) k).
+
+Definition executeInterleave (batch : list (prod nat bool)) (k : kvcg) : kvcg := 
+fold_left (fun (y : kvcg) (x : prod nat bool) => if (snd x) then atomicModify (fst x) y else snd (atomicGet (fst x) y)) batch k.
+
+Lemma APostConditionOfBatch : forall (batch : list(prod nat bool)) (k : kvcg),
+executeUpdateThenGet batch k = executeUpdate batch k.
+Proof.
+    intros.
+    unfold executeUpdate.
+    unfold executeUpdateThenGet.
+    induction (getReadOps batch).
+    - reflexivity.
+    - simpl. unfold atomicGet. 
+      destruct (getModel (doListOfModifcations (getLinerizationOfModifyOps batch) k) a).
+      simpl. apply IHl.
+      simpl. apply IHl.
+Qed.
+
+Lemma doListOfModifcations_App : forall (l l0 l1 : list nat) (k : kvcg),
+l = l0 ++ l1 -> (doListOfModifcations l k) = (doListOfModifcations l1 (doListOfModifcations l0 k)).
+Proof.
+    intros.
+    rewrite H.
+    apply fold_left_app.
+Qed.
+
+Theorem ConcurrentGetDoesntModifyState : forall (l l0 l1 : list nat) (key : nat) (k : kvcg),
+l = l0 ++ l1 -> (doListOfModifcations l k) = (doListOfModifcations l1 (snd (atomicGet key (doListOfModifcations l0 k)))).
+Proof.
+    intros.
+    unfold atomicGet.
+    destruct (getModel (doListOfModifcations l0 k) key); simpl; apply doListOfModifcations_App; auto.
+Qed.
+
+Theorem ConcurrentBatch : forall (batch : list(prod nat bool)) (k : kvcg),
+executeInterleave batch k = executeUpdateThenGet batch k.
+Proof.
+    induction batch.
+    - auto.
+    - intros. 
+      rewrite APostConditionOfBatch.
+      destruct (snd a) eqn:E.
+      + simpl. 
+        rewrite E. 
+        rewrite IHbatch. 
+        rewrite APostConditionOfBatch.
+        unfold executeUpdate.
+        simpl.
+        rewrite E.
+        simpl.
+        reflexivity.
+      + simpl.
+        rewrite E.
+        rewrite IHbatch.
+        rewrite APostConditionOfBatch.
+        unfold executeUpdate.
+        simpl.
+        rewrite E.
+        simpl.
+        unfold atomicGet.
+        destruct (getModel k (fst a)); auto.
 Qed.
